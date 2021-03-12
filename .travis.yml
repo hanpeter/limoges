@@ -1,0 +1,14 @@
+language: node_js
+branches:
+  only:
+  - master
+  - "/^\\d+\\.\\d+\\.\\d+$/"  # Use sem var
+# GOTCHA: Letting Travis handle `install` and `script` with default values
+deploy:
+  provider: heroku
+  api_key:
+    secure: qKpb4xLQyi9iHri3UJT0F8wn23navgjMf1Yzg+6cVXEdXR6EBw4FXkhZ3EYH/vJcYUUfIzfT/q546ZIf9S2uz217lJVvonkqsTOq/9wwoIxnrSukGfrY3rZM2y3doJv1BHqU/BZa82BpW9+gaIUQ3UynF0FCtH2+3YlPbEsFIYLA2CWJUFpD8gH8f/Bjxi64M9Ti4CA2hNQ8IgGmeC+YfVgwfcqUvzmq+W9+e/cW2UOB3ZUoozzPVJW2VRuiZ06E36OA6Zj14ZJR2saFKcprBvOSbVV3xWbXxxBqOEji1IAm+x1bW1paeLlA3YjSpOG9HX7IpxjtGu66SMp12oAtJgJqJq3nmk/HJzMfekaBuuaulO8SVkG3FHnrxK+rzYcvMxQXBJdmgeY7lpCZoDeqQUY5umt8OPckVSbvuwrSyJkUmOMAbzuHEQ7M1SG7K001onogyXMlFGXoiv13Bhm1g0ga69hWpB2HNrb3FIQtacZKIVdBsH0E/nJzNCbA0d1hYLguximTzoN7Igg56ZT7kJMbHzScVtsHrIrRChuT+O+fu0EazdHVRYsgMFSKUoeCp0Pl4wX5Y8Nv4uQIIEid8dP8X56Wq7SFCXOcqI7l1ixqtxNPqZZ5xRg3FvUkTy+XnaWqUCPsIrcVpXpRPC8b4z6WSrfbyleGU9YKIGYaOwE=
+  app: phan-limoges
+  on:
+    tags: true
+    repo: hanpeter/limoges

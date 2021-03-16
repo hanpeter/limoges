@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     'use strict';
 
     const celadonUrl = '//phan-celadon.herokuapp.com';
@@ -38,7 +38,7 @@ $(document).ready(function() {
                 align: 'right',
                 sortable: true,
                 searchable: false,
-                formatter: function(value) {
+                formatter: function (value) {
                     return dollarFormatter.format(value);
                 },
             }, {
@@ -49,6 +49,55 @@ $(document).ready(function() {
                 searchable: false,
             }],
             data: data,
+            buttons: function() {
+                return {
+                    btnAdd: {
+                        text: 'Add',
+                        icon: 'fa-plus',
+                        event: function () {
+                            $('#addPurchaseModal').modal('show');
+                        },
+                    }
+                };
+            },
+            showColumns: true,
+            showPaginationSwitch: true,
+            showButtonText: true,
+        });
+    });
+
+    $.ajax({
+        method: 'GET',
+        url: celadonUrl + '/purchaser',
+        dataType: 'json',
+    }).done(function (data) {
+        $(data).each(function (index, purchaser) {
+            $('select#purchaser').append($('<option>', {
+                value: purchaser.id,
+                text: purchaser.name,
+            }));
+        });
+    });
+
+    $('#addPurchaseButton').click(function () {
+        let purchaseDate = $('#addPurchaseModal input#purchaseDate').val();
+        let cost = $('#addPurchaseModal input#cost').val();
+        cost = cost ? Number(cost) : 0;
+        let purchaser = $('#addPurchaseModal select#purchaser').val();
+
+        $.ajax({
+            method: 'POST',
+            url: celadonUrl + '/purchase',
+            data: JSON.stringify({
+                purchase_date: purchaseDate,
+                cost: cost,
+                purchaser_id: purchaser,
+                items: [],
+            }),
+            contentType: 'application/json',
+        }).done(function () {
+            console.log('New purchase added');
+            $('#addPurchaseModal').modal('hide');
         });
     });
 });

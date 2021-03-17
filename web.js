@@ -9,3 +9,9 @@ app.listen(port, () => {
 });
 
 app.use(express.static('static'));
+
+app.get('/config', (req, res) => {
+    res.json({
+        celadonUrl: process.env.CELADON_URL,
+    });
+});

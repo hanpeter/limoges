@@ -49,6 +49,8 @@ $(document).ready(() => {
             });
         }).then(() => {
             $('#add-purchase-modal').modal('hide');
+            $('#item-table').bootstrapTable('refresh');
+            $('#purchase-table').bootstrapTable('refresh');
         });
     });
 });

@@ -80,5 +80,7 @@ $(document).ready(() => {
         showPaginationSwitch: true,
         showRefresh: true,
         showButtonText: true,
+        sortName: 'id',
+        sortOrder: 'asc',
     });
 });

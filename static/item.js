@@ -8,7 +8,7 @@ $(document).ready(() => {
 
     let celadonUrl;
 
-    $('#table').bootstrapTable({
+    $('#item-table').bootstrapTable({
         ajax: (params) => {
             let configPromise;
             if (!!celadonUrl) {
@@ -71,7 +71,7 @@ $(document).ready(() => {
                     text: 'Add',
                     icon: 'fa-plus',
                     event: () => {
-                        $('#addPurchaseModal').modal('show');
+                        $('#add-purchase-modal').modal('show');
                     },
                 }
             };

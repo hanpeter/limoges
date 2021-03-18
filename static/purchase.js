@@ -18,11 +18,11 @@ $(document).ready(() => {
         });
     });
 
-    $('#addPurchaseButton').click(() => {
-        let purchaseDate = $('#addPurchaseModal input#purchaseDate').val();
-        let cost = $('#addPurchaseModal input#cost').val();
+    $('#add-purchase-button').click(() => {
+        let purchaseDate = $('#add-purchase-modal input#purchase-date').val();
+        let cost = $('#add-purchase-modal input#cost').val();
         cost = cost ? Number(cost) : 0;
-        let purchaser = $('#addPurchaseModal select#purchaser').val();
+        let purchaser = $('#add-purchase-modal select#purchaser').val();
 
         let configPromise;
         if (!!celadonUrl) {
@@ -48,7 +48,7 @@ $(document).ready(() => {
                 contentType: 'application/json',
             });
         }).then(() => {
-            $('#addPurchaseModal').modal('hide');
+            $('#add-purchase-modal').modal('hide');
         });
     });
 });

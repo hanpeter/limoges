@@ -18,7 +18,7 @@ $(document).ready(() => {
         });
     });
 
-    $('#add-purchase-button').click(() => {
+    let submitForm = () => {
         let purchaseDate = $('#add-purchase-modal input#purchase-date').val();
         let cost = $('#add-purchase-modal input#cost').val();
         cost = cost ? Number(cost) : 0;
@@ -52,5 +52,12 @@ $(document).ready(() => {
             $('#item-table').bootstrapTable('refresh');
             $('#purchase-table').bootstrapTable('refresh');
         });
+    };
+
+    $('#add-purchase-form').submit((e) => {
+        e.preventDefault();
+        submitForm();
     });
+
+    $('#add-purchase-button').click(submitForm);
 });

@@ -1,4 +1,10 @@
 $(document).ready(() => {
+    const dollarFormatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+
+
     let celadonUrl;
 
     getConfig().then((data) => {
@@ -35,6 +41,23 @@ $(document).ready(() => {
             });
         }
 
+        let items = [];
+        $('.add-purchase-item').each((i, elem) => {
+            let brand = $(elem).find('.brand').first().val().trim();
+            let name = $(elem).find('.name').first().val().trim();
+            let cost = $(elem).find('.cost').first().val();
+            cost = cost ? Number(cost) : 0;
+            let quantity = $(elem).find('.quantity').first().val();
+            quantity = quantity ? Number(quantity) : 0;
+
+            items.push({
+                brand: brand,
+                name: name,
+                cost: cost,
+                quantity: quantity,
+            });
+        });
+
         configPromise.then(() => {
             return $.ajax({
                 method: 'POST',
@@ -43,7 +66,7 @@ $(document).ready(() => {
                     purchase_date: purchaseDate,
                     cost: cost,
                     purchaser_id: purchaser,
-                    items: [],
+                    items: items,
                 }),
                 contentType: 'application/json',
             });
@@ -54,10 +77,105 @@ $(document).ready(() => {
         });
     };
 
+    let calcTotalCost = () => {
+        let totalCost = 0.0;
+        $('.add-purchase-item').each((i, elem) => {
+            let cost = $(elem).find('.cost').first().val();
+            cost = cost ? Number(cost) : 0;
+            let quantity = $(elem).find('.quantity').first().val();
+            quantity = quantity ? Number(quantity) : 0;
+
+            totalCost += cost * quantity;
+        });
+
+        $('#add-purchase-modal span#costSpan').text(dollarFormatter.format(totalCost));
+        $('#add-purchase-modal input#cost').val(totalCost);
+    };
+
+    let trimText = (e) => {
+        let old = $(e.target).val();
+        $(e.target).val(old.trim());
+    }
+
     $('#add-purchase-form').submit((e) => {
         e.preventDefault();
         submitForm();
     });
 
     $('#add-purchase-button').click(submitForm);
+
+    $('#new-item').click(() => {
+        let brandDiv = $('<div>', {
+            class: 'col',
+        });
+        let brandInput = $('<input>', {
+            class: 'form-control brand',
+            placeholder: 'Brand',
+        });
+        brandInput.change(trimText);
+        brandDiv.append(brandInput);
+
+        let nameDiv = $('<div>', {
+            class: 'col',
+        });
+        let nameInput = $('<input>', {
+            class: 'form-control name',
+            placeholder: 'Name',
+        });
+        nameInput.change(trimText);
+        nameDiv.append(nameInput);
+
+        let costDiv = $('<div>', {
+            class: 'col input-group',
+        });
+        costDiv.append(
+            $('<div>', {
+                class: 'input-group-prepend',
+            }).append(
+                $('<span>', {
+                    class: 'input-group-text',
+                    text: '$',
+                })
+            )
+        );
+        let costInput = $('<input>', {
+            type: 'number',
+            class: 'form-control cost',
+            step: '0.01',
+            placeholder: 'Cost',
+        });
+        costInput.change(calcTotalCost);
+        costDiv.append(costInput);
+
+        let quanDiv = $('<div>', {
+            class: 'col',
+        });
+        let quanInput = $('<input>', {
+            type: 'number',
+            class: 'form-control quantity',
+            step: '1',
+            placeholder: 'Quantity',
+        });
+        quanInput.change(calcTotalCost);
+        quanDiv.append(quanInput);
+
+        let rootDiv = $('<div>', {
+            class: 'form-group',
+        });
+        rootDiv.append(
+            $('<div>', {
+                class: 'col-sm-10 offset-sm-2',
+            }).append($('<div>', {
+                    class: 'form-row add-purchase-item',
+                }).append(brandDiv, nameDiv, costDiv, quanDiv)
+            )
+        );
+
+        $('#add-purchase-form').append(rootDiv);
+    });
+
+    $('#add-purchase-form .add-purchase-item .brand').change(trimText);
+    $('#add-purchase-form .add-purchase-item .name').change(trimText);
+    $('#add-purchase-form .add-purchase-item .cost').change(calcTotalCost);
+    $('#add-purchase-form .add-purchase-item .quantity').change(calcTotalCost);
 });

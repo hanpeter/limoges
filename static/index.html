@@ -44,7 +44,7 @@
       </section>
     </main>
     <aside id="add-purchase-modal" class="modal fade" tabindex="-1" aria-labelledby="add-purchase-modal-title" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
           <header class="modal-header">
             <h5 id="add-purchase-modal-title" class="modal-title">New Purchase</h5>
@@ -53,20 +53,11 @@
             </button>
           </header>
           <section class="modal-body">
-            <form>
+            <form id="add-purchase-form">
               <div class="form-group row">
                 <label for="purchase-date" class="col-sm-2 col-form-label">Purchase Date</label>
                 <div class="col-sm-10 input-group">
                   <input type="date" id="purchase-date" class="form-control" />
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="cost" class="col-sm-2 col-form-label">Cost</label>
-                <div class="col-sm-10 input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
-                  </div>
-                  <input type="number" id="cost" class="form-control" step="0.01" />
                 </div>
               </div>
               <div class="form-group row">
@@ -76,11 +67,48 @@
                   </select>
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="new-item" class="col-sm-2 col-form-label">Items</label>
+                <div class="col-sm-10 text-right">
+                  Total Cost:
+                  <span id="costSpan" class="font-weight-bold">$0.00</span>
+                  <button type="button" id="new-item" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <input type="hidden" id="cost" />
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10 offset-sm-2">
+                  <div class="form-row add-purchase-item">
+                    <div class="col">
+                      <input type="text" class="form-control brand" placeholder="Brand" />
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control name" placeholder="Name" />
+                    </div>
+                    <div class="col input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input type="number" class="form-control cost" step="0.01" placeholder="Cost" />
+                    </div>
+                    <div class="col">
+                      <input type="number" class="form-control quantity" step="1" placeholder="Quantity" />
+                    </div>
+                    <div class="col-sm-1">
+                      <button type="button" class="btn btn-secondary btn-trash">
+                        <i class="fa fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </section>
           <footer class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="add-purchase-button" class="btn btn-success">Add</button>
+            <button type="submit" id="add-purchase-button" class="btn btn-success">Add</button>
           </footer>
         </div>
       </div>

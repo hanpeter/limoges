@@ -95,7 +95,12 @@ $(document).ready(() => {
     let trimText = (e) => {
         let old = $(e.target).val();
         $(e.target).val(old.trim());
-    }
+    };
+
+    let delItem = (e) => {
+        let btn = $(e.target);
+        $(btn).parents('.form-group').remove();
+    };
 
     $('#add-purchase-form').submit((e) => {
         e.preventDefault();
@@ -159,6 +164,16 @@ $(document).ready(() => {
         quanInput.change(calcTotalCost);
         quanDiv.append(quanInput);
 
+        let trashDiv = $('<div>', {
+            class: 'col-sm-1',
+        });
+        let trashBtn = $('<button>', {
+            class: 'btn btn-secondary btn-trash',
+        });
+        trashBtn.append($('<i>', { class: 'fa fa-trash-alt' }));
+        trashBtn.click(delItem);
+        trashDiv.append(trashBtn);
+
         let rootDiv = $('<div>', {
             class: 'form-group',
         });
@@ -167,7 +182,7 @@ $(document).ready(() => {
                 class: 'col-sm-10 offset-sm-2',
             }).append($('<div>', {
                     class: 'form-row add-purchase-item',
-                }).append(brandDiv, nameDiv, costDiv, quanDiv)
+                }).append(brandDiv, nameDiv, costDiv, quanDiv, trashDiv)
             )
         );
 
@@ -178,4 +193,5 @@ $(document).ready(() => {
     $('#add-purchase-form .add-purchase-item .name').change(trimText);
     $('#add-purchase-form .add-purchase-item .cost').change(calcTotalCost);
     $('#add-purchase-form .add-purchase-item .quantity').change(calcTotalCost);
+    $('#add-purchase-form .add-purchase-item .btn-trash').click(delItem);
 });

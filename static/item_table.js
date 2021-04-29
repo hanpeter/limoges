@@ -8,6 +8,32 @@ $(document).ready(() => {
 
     let celadonUrl;
 
+    let sellItem = (item) => {
+        item.quantity--;
+
+        let configPromise;
+        if (!!celadonUrl) {
+            let dfd = $.Deferred();
+            dfd.resolve();
+            configPromise = dfd.promise();
+        } else {
+            configPromise = getConfig().then((data) => {
+                celadonUrl = data.celadonUrl;
+            });
+        }
+
+        configPromise.then(() => {
+            return $.ajax({
+                method: 'PUT',
+                url: celadonUrl + '/item/' + item.id,
+                data: JSON.stringify(item),
+                contentType: 'application/json',
+            });
+        }).then((data) => {
+            $('#item-table').bootstrapTable('refresh');
+        });
+    };
+
     $('#item-table').bootstrapTable({
         ajax: (params) => {
             let configPromise;
@@ -64,6 +90,29 @@ $(document).ready(() => {
             align: 'right',
             sortable: true,
             searchable: false,
+        }, {
+            title: 'Actions',
+            align: 'center',
+            sortable: false,
+            searchable: false,
+            formatter: (value, row) => {
+                let sellBtn = $([
+                    '<button type="button" class="btn btn-secondary btn-ship">',
+                    '<i class="fa fa-shipping-fast"></i>',
+                    '</button>',
+                ].join(''));
+
+                if (row.quantity < 1) {
+                    sellBtn.attr('disabled', 'disabled');
+                }
+
+                return $('<div>').append(sellBtn).html();
+            },
+            events: {
+                'click .btn-ship': (e, value, row) => {
+                    sellItem(row);
+                },
+            },
         }],
         buttons: () => {
             return {

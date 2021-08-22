@@ -1,0 +1,58 @@
+application:
+  # -- Name of this application
+  name: limoges
+  # -- Which port does this application listen on?
+  port: 9001
+  celadon:
+    # -- Public URL of where Celadon application is
+    url: celadon.example.com
+    # -- Port that Celadon application listens to
+    port: 5000
+
+resources:
+  limits:
+    # -- Pod CPU limit
+    cpu: 1
+    # -- Pod memory limit
+    memory: 512Mi
+  requests:
+    # -- Amount of CPU needed for this pod
+    cpu: 500m
+    # -- Amount of memory needed for this pod
+    memory: 256Mi
+
+hpa:
+  # -- Enable Horizontal Pod Autoscaler
+  enabled: true
+  # -- Minimum allowed number of pods
+  minReplicas: 1
+  # -- Maximum allowed number of pods
+  maxReplicas: 6
+  # -- Target CPU utilization of a pod (based on the resources defined above)
+  avgCPUUtilizationPercentage: 50
+  # -- Target memory utilization of a pod (based on the resources defined above)
+  avgMemoryUtilizationPercentage: 50
+
+image:
+  # -- Docker image of the application
+  repository: limoges
+  # -- Docker tag/version of the application
+  tag: latest
+  # -- Docker pull policy to use
+  pullPolicy: IfNotPresent
+
+service:
+  # -- Service type
+  type: NodePort
+  # -- Which port does the service expose?
+  port: 9001
+
+localDev:
+  # -- Enable configurations to allow local development
+  enabled: false
+  # -- Path to the source code
+  # 20210821: As of now, for Windows, use the format `/run/desktop/mnt/host/c/path/to/file`
+  # https://github.com/kubernetes/kubernetes/issues/59876#issuecomment-849846580
+  path: ''
+  # -- Hostname of the local Kubernetes node
+  hostname: 'docker-desktop'

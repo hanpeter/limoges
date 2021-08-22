@@ -1,0 +1,12 @@
+apiVersion: v2
+name: limoges
+description: A Helm chart for Limoges
+type: application
+version: 0.1.0
+appVersion: 0.0.1
+home: https://github.com/hanpeter/limoges
+sources:
+  - https://github.com/hanpeter/limoges
+maintainers:
+  - name: Peter Han
+    email: git@peterhan.ca

@@ -97,9 +97,9 @@ $(document).ready(() => {
             searchable: false,
             formatter: (value, row) => {
                 let sellBtn = $([
-                    '<button type="button" class="btn btn-secondary btn-ship">',
+                    '<a href="sell" class="btn btn-secondary">',
                     '<i class="fa fa-shipping-fast"></i>',
-                    '</button>',
+                    '</a>',
                 ].join(''));
 
                 if (row.quantity < 1) {
@@ -107,11 +107,6 @@ $(document).ready(() => {
                 }
 
                 return $('<div>').append(sellBtn).html();
-            },
-            events: {
-                'click .btn-ship': (e, value, row) => {
-                    sellItem(row);
-                },
             },
         }],
         buttons: () => {

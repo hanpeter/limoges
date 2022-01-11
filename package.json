@@ -25,7 +25,7 @@
     "node": "^14.16.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.2"
   },
   "devDependencies": {
     "eslint": "^7.21.0"

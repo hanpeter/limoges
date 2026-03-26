@@ -1,29 +1,38 @@
 {
   "name": "limoges",
   "version": "0.0.1",
-  "description": "",
-  "main": "web.js",
+  "description": "TODO",
+  "private": true,
   "scripts": {
-    "test": "npm run lint",
+    "start": "node web.js",
     "lint": "eslint .",
-    "start": "node web.js"
+    "test": "npm run lint"
+  },
+  "engines": {
+    "node": "^24.0.0",
+    "npm": "^11.0.0"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hanpeter/limoges.git"
   },
+  "bugs": "https://github.com/hanpeter/limoges/issues",
+  "homepage": "https://github.com/hanpeter/limoges",
   "author": {
     "name": "Peter Han",
     "email": "git@peterhan.ca"
   },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hanpeter/limoges/issues"
-  },
-  "homepage": "https://github.com/hanpeter/limoges#readme",
-  "engines": {
-    "node": "^24.0.0"
-  },
   "dependencies": {
     "express": "^5.2.1"
   },

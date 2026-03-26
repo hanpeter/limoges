@@ -31,7 +31,7 @@ $(document).ready(() => {
         let purchaser = $('#add-purchase-modal select#purchaser').val();
 
         let configPromise;
-        if (!!celadonUrl) {
+        if (celadonUrl) {
             let dfd = $.Deferred();
             dfd.resolve();
             configPromise = dfd.promise();

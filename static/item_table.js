@@ -11,7 +11,7 @@ $(document).ready(() => {
     $('#item-table').bootstrapTable({
         ajax: (params) => {
             let configPromise;
-            if (!!celadonUrl) {
+            if (celadonUrl) {
                 let dfd = $.Deferred();
                 dfd.resolve();
                 configPromise = dfd.promise();

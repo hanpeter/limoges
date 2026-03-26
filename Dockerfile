@@ -1,4 +1,4 @@
-FROM node:fermium
+FROM node:krypton
 
 # Set up working directory
 WORKDIR /limoges
@@ -7,7 +7,7 @@ WORKDIR /limoges
 # XXX: Copy only package.json & package-lock.json first to take
 #      advantage of Docker build cache
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 
 # Bundle app source
 COPY . .

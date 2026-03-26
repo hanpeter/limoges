@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/hanpeter/limoges#readme",
   "engines": {
-    "node": "^14.16.0"
+    "node": "^24.0.0"
   },
   "dependencies": {
     "express": "^4.17.1"

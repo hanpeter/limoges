@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "TODO",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node web.js",
     "lint": "eslint .",

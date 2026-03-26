@@ -8,7 +8,7 @@ export default defineConfig([
         files: ["web.js"],
         languageOptions: {
             ecmaVersion: 2024,
-            sourceType: "commonjs",
+            sourceType: "module",
             globals: {
                 ...globals.node,
             },
@@ -34,6 +34,6 @@ export default defineConfig([
         },
     },
     {
-        ignores: ["eslint.config.mjs", "node_modules/**"],
+        ignores: ["node_modules/**"],
     },
 ]);

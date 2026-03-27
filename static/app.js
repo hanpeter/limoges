@@ -1,5 +1,6 @@
 import { configure } from './api.js';
 import { init as initCustomers } from './customers.js';
+import { init as initSales } from './sales.js';
 
 async function boot() {
     try {
@@ -17,7 +18,24 @@ async function boot() {
         return;
     }
 
-    initCustomers();
+    function route() {
+        const view = location.hash || '#sales';
+        setActiveNav(view);
+        if (view === '#customers') {
+            initCustomers();
+        } else {
+            initSales();
+        }
+    }
+
+    window.addEventListener('hashchange', route);
+    route();
+}
+
+function setActiveNav(hash) {
+    document.querySelectorAll('.nav-link[data-view]').forEach((el) => {
+        el.classList.toggle('active', el.dataset.view === hash);
+    });
 }
 
 boot();

@@ -37,3 +37,10 @@ body {
 .btn-delete {
     padding: 0.2rem 0.45rem;
 }
+
+.btn.btn-outline-primary:disabled,
+.btn.btn-outline-success:disabled {
+    color: #adb5bd;
+    border-color: #adb5bd;
+    opacity: 1;
+}

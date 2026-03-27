@@ -24,3 +24,7 @@ async function request(method, path, body) {
 export const getCustomers = () => request('GET', '/customer');
 export const createCustomer = (data) => request('POST', '/customer', data);
 export const updateCustomer = (id, data) => request('PUT', `/customer/${id}`, data);
+
+export const getSales = () => request('GET', '/sale');
+export const createSale = (data) => request('POST', '/sale', data);
+export const updateSale = (id, data) => request('PUT', `/sale/${id}`, data);
